@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package service;
+import "github.com/mwitkow/go-proto-validators/validator.proto";
+
+service User {
+    rpc Create(UserCreateRequest) returns (UserCreateResponse) {}
+}
+
+message UserCreateRequest {
+    string id   = 1;
+    string name = 2;
+    int32  age  = 3 [(validator.field) = {int_gt: -1, int_lt: 151}];
+}
+
+message UserCreateResponse {
+    string message = 1;
+}
